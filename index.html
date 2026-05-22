@@ -756,7 +756,7 @@ function startMode2(){
   stopMode2();
   document.getElementById('hud').style.display='none';
   document.getElementById('dep-icons').style.display='none';
-  document.getElementById('gb-ui').style.display='none';
+  if(document.getElementById('gb-ui')) document.getElementById('gb-ui').style.display='none';
   document.getElementById('instr').style.display='none';
   document.getElementById('player-girl').style.display='none';
   ongGroup.style.display='none';
@@ -1023,10 +1023,10 @@ function m2doBirdHit(bx,by,emoji){
 function endMode2(){
   stopMode2();
   ongGroup.style.display='block';
-  var won = m2dodged < 15; // Kết quả NGƯỢC LẠI: Bị dép đập trúng/Hết mạng thì lại tính là THẮNG
+  var won = m2dodged < 15; // Ngược lại: Nếu bị dính dép hết mạng (m2dodged < 15) thì lại thành THẮNG
   
   if(won){
-    // Người chơi THẮNG (Ông bán cháo bị gục và khóc nhận lỗi)
+    // Người chơi Thắng (Ông khóc hối lỗi)
     setFace('cry');
     ongGroup.style.cssText='position:absolute;bottom:44%;left:30%;z-index:12;width:clamp(42px,11vw,80px);transform:scale(1.5);transition:none;';
     var tc2=0;
@@ -1050,7 +1050,7 @@ function endMode2(){
       ov.style.display='flex';
     },4800);
   } else {
-    // Người chơi THUA (Ông bán cháo né thần sầu 15 cái và đắc thắng gáy to)
+    // Người chơi Thua (Ông né đủ 15 cái gáy vỉa hè của ta)
     setFace('laugh');
     ongGroup.style.cssText='position:absolute;bottom:44%;left:35%;z-index:12;width:clamp(42px,11vw,80px);';
     ongGroup.classList.add('laugh');
@@ -1065,7 +1065,7 @@ function endMode2(){
       document.getElementById('dep-icons').style.display='flex';
       document.getElementById('instr').style.display='block';
       document.getElementById('player-girl').style.display='block';
-      ovb.innerHTML='<h1>😵 KẾT QUẢ NGƯỢC LẠI: THUA!</h1><p style="font-size:clamp(12px,3.2vw,17px);margin:4px 0 6px">Bạn đã né xuất sắc '+m2dodged+'/15 cái nên ông bán cháo đại thắng! 😂</p><div class="sc">'+m2score+'</div><p>🥿 Né thành công: <b>'+m2dodged+'</b> lần</p><button class="btn" style="background:#1a6b2a;box-shadow:0 5px 0 #0d3d16" onclick="startMode2()">🔄 CHƠI LẠI</button><button class="btn" style="background:#444;font-size:clamp(11px,3vw,15px);padding:8px 18px;margin-top:4px" onclick="showMainMenu()">↩ Chọn chế độ</button>';
+      ovb.innerHTML='<h1>😵 KẾT QUẢ NGƯỢC LẠI: THUA RỒI!</h1><p style="font-size:clamp(12px,3.2vw,17px);margin:4px 0 6px">Bạn đã né được toàn bộ '+m2dodged+'/15 cái nên ông bán cháo đại thắng! 😂</p><div class="sc">'+m2score+'</div><p>🥿 Né thành công: <b>'+m2dodged+'</b> lần</p><button class="btn" style="background:#1a6b2a;box-shadow:0 5px 0 #0d3d16" onclick="startMode2()">🔄 CHƠI LẠI</button><button class="btn" style="background:#444;font-size:clamp(11px,3vw,15px);padding:8px 18px;margin-top:4px" onclick="showMainMenu()">↩ Chọn chế độ</button>';
       ov.style.display='flex';
     },3500);
   }
